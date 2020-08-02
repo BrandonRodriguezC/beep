@@ -103,14 +103,14 @@
   }
 
   function onReceiveStream(stream){
-    var audio= document.querySelector('audio');
+//    var audio= document.querySelector('audio');
     var video= document.querySelector('video');
-    audio.srcObject=  stream;
+//    audio.srcObject=  stream;
     video.srcObject= stream;
 
-    audio.onloadedmetadata= function(e){
-      audio.play();
-    }
+//    audio.onloadedmetadata= function(e){
+//      audio.play();
+//    }
     video.onloadedmetadat= function(e){
       video.play();
     }
@@ -120,6 +120,6 @@
   initialice();
   contactB.addEventListener("click",contact);
   botonEnviar.addEventListener("click",sendM);
-  llamadaVozBoton.addEventListener("click", call);
+ // llamadaVozBoton.addEventListener("click", call);
   llamadaVideoBoton.addEventListener("click", video);
 })();
