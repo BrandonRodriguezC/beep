@@ -9,7 +9,7 @@
   var botonEnviar=document.getElementById('botonEnviar');
   var cajaMensajes= document.getElementById('cajaMensajes');
   var llamadaVozBoton= document.getElementById('botonLlamarVoz');
-
+  var llamadaVideoBoton= document.getElementById('botonLlamarVideo');
 
   function initialice(){
     peer.on('open', function(id) {
@@ -26,7 +26,7 @@
       navigator.getMedia = ( navigator.getUserMedia ||
                            navigator.webkitGetUserMedia ||
                            navigator.mozGetUserMedia);
-      navigator.getMedia({ audio: true, video: false },
+      navigator.getMedia({ audio: true, video: true },
         function(stream){
         call.answer(stream);
       call.on('stream', function(remoteStream){
@@ -37,6 +37,7 @@
     })
 
     });
+
 
     }
 
@@ -84,11 +85,34 @@
 
   }
 
+  function video(){
+     navigator.getMedia = ( navigator.getUserMedia ||
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia);
+    navigator.getMedia({ audio: true, video: true }, function(stream){
+      var call = peer.call(contactIn.value,
+    stream);
+    call.on('stream', function(remoteStream){
+      onReceiveStream(remoteStream);
+    });
+  }, function(err){
+    console.log('fallamos');
+  });
+
+  
+  }
+
   function onReceiveStream(stream){
     var audio= document.querySelector('audio');
+    var video= document.querySelector('video');
     audio.srcObject=  stream;
+    video.srcObject= stream;
+
     audio.onloadedmetadata= function(e){
       audio.play();
+    }
+    video.onloadedmetadat= function(e){
+      video.play();
     }
   }
 
@@ -97,4 +121,5 @@
   contactB.addEventListener("click",contact);
   botonEnviar.addEventListener("click",sendM);
   llamadaVozBoton.addEventListener("click", call);
+  llamadaVideoBoton.addEventListener("click", video);
 })();
