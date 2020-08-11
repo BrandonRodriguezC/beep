@@ -35,7 +35,7 @@ var backgrounds=['https://1.bp.blogspot.com/-vX7wRl89e2U/WKh_fq0aNtI/AAAAAAAABHA
       navigator.getMedia = ( navigator.getUserMedia ||
                            navigator.webkitGetUserMedia ||
                            navigator.mozGetUserMedia);
-      navigator.getMedia({ audio: true, video: true },
+      navigator.getMedia({ audio: true, video: false },
         function(stream){
         call.answer(stream);
 call.on('stream', function(remoteStream){
@@ -119,22 +119,22 @@ call.on('stream', function(remoteStream){
   }
 
   function onReceiveStream(stream){
-//    var audio= document.querySelector('audio');
-    var video= document.querySelector('video');
-//    audio.srcObject=  stream;
+    var audio= document.querySelector('audio');
+//    var video= document.querySelector('video');
+    audio.srcObject=  stream;
     video.srcObject= stream;
 
-//    audio.onloadedmetadata= function(e){
-//      audio.play();
-//    }
-    video.onloadedmetadat= function(e){
-      video.play();
+    audio.onloadedmetadata= function(e){
+      audio.play();
     }
+//    video.onloadedmetadat= function(e){
+//      video.play();
+//    }
   }
   initialice();
   contactB.addEventListener("click",contact);
   botonEnviar.addEventListener("click",sendM);
-// llamadaVozBoton.addEventListener("click", call);
+ llamadaVozBoton.addEventListener("click", call);
   mensajeInput.addEventListener('keyup', function(e){ if(conn !=null && e.keyCode==13){sendM()}});
-  llamadaVideoBoton.addEventListener("click", video);
+//  llamadaVideoBoton.addEventListener("click", video);
 })();
